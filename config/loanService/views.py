@@ -2,11 +2,26 @@ from rest_framework import generics
 
 from .models import Loan
 from .serializers import LoanSerializer
+from treasuryService.models import Book
+from userService.models import Profile
 
 
 class LoanCreateView(generics.CreateAPIView):
     queryset = Loan.objects.all()
     serializer_class = LoanSerializer
+
+    def perform_create(self, serializer):
+        data = self.request.data
+        
+        book = Book.objects.get(title=data['book'])
+        book.borrow()
+        book.save()
+
+        borrower = Profile.objects.get(username=data['borrower'])
+        borrower.addLoan()
+        borrower.save()
+
+        return super().perform_create(serializer)
 
 
 class LoanReadByBookView(generics.RetrieveAPIView):
@@ -41,13 +56,14 @@ class LoanUpdateByUserView(generics.UpdateAPIView):
         return super().update(request, *args, **kwargs)
 
 
-class LoanDeleteByBookView(generics.DestroyAPIView):
+class LoanDeleteView(generics.DestroyAPIView):
     queryset = Loan.objects.all()
     serializer_class = LoanSerializer
     lookup_field = 'book__title'
+    
+    def delete(self, request, *args, **kwargs):
+        book = Book.objects.get(title=kwargs['book__title'])
+        book.giveBack()
+        book.save()
 
-
-class LoanDeleteByUserView(generics.DestroyAPIView):
-    queryset = Loan.objects.all()
-    serializer_class = LoanSerializer
-    lookup_field = 'borrower__username'
+        return super().delete(request, *args, **kwargs)

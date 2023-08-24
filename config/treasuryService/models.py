@@ -1,4 +1,5 @@
 from django.db import models
+from loanService.Exceptions import NotAvailableBook
 
 
 class Book(models.Model):
@@ -8,7 +9,7 @@ class Book(models.Model):
 
     def borrow(self):
         if not self.isAvailable:
-            raise Exception('The book is unavailable.')
+            raise NotAvailableBook()
         else:
             self.isAvailable = False
 
