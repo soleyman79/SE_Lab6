@@ -1,7 +1,7 @@
 from django.db import models
 
-from config.treasuryService.models import Book
-from config.userService.models import Profile
+from treasuryService.models import Book
+from userService.models import Profile
 
 
 class Loan(models.Model):
