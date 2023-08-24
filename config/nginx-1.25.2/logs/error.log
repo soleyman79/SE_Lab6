@@ -1,0 +1,5 @@
+2023/08/24 19:42:14 [error] 18192#15176: *1 CreateFile() "D:\Software Engineering Lab\Docker\config\nginx-1.25.2/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/"
+2023/08/24 20:01:10 [emerg] 10940#16280: duplicate location "/" in D:\Software Engineering Lab\Docker\config\nginx-1.25.2/conf/nginx.conf:53
+2023/08/24 20:03:22 [emerg] 12228#14112: invalid number of arguments in "location" directive in D:\Software Engineering Lab\Docker\config\nginx-1.25.2/conf/nginx.conf:45
+2023/08/24 20:03:32 [emerg] 9912#9944: duplicate location "/" in D:\Software Engineering Lab\Docker\config\nginx-1.25.2/conf/nginx.conf:53
+2023/08/24 20:05:42 [notice] 15104#11208: signal process started

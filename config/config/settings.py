@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-de7o%4w^u8msmly1)83nsph&g0%^khd+ifnz3jko(_@podl)5m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'stream']
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'corsheaders',
 
     'loanService.apps.LoanserviceConfig',
     'userService.apps.UserserviceConfig',
@@ -53,6 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -131,3 +134,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'EXCEPTION_HANDLER': 'loanService.handler.customExceptionHandler'
 }
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CSRF_TRUSTED_ORIGINS = [
+     "http://localhost",
+]
