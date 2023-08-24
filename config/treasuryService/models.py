@@ -2,8 +2,8 @@ from django.db import models
 
 
 class Book(models.Model):
-    title = models.CharField(max_length=128, null=False)
-    pageNumbers = models.SmallIntegerField(null=True)
+    title = models.CharField(max_length=128, null=False, unique=True)
+    pagesNumber = models.SmallIntegerField(null=True)
     isAvailable = models.BooleanField(default=True)
 
     def borrow(self):
@@ -14,3 +14,6 @@ class Book(models.Model):
 
     def giveBack(self):
         self.isAvailable = True
+
+    def __str__(self) -> str:
+        return f'id: {self.pk} title: {self.title} pageNumbers: {self.pagesNumber} isAvailable: {self.isAvailable}'
