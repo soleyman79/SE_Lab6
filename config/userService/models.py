@@ -1,9 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    username = models.CharField(max_length=128, primary_key=True, default=None)
     credit = models.IntegerField(null=False, default=0)
     totalLoan = models.SmallIntegerField(null=False, default=0)
 
@@ -14,4 +13,4 @@ class Profile(models.Model):
         self.totalLoan += 1
 
     def __str__(self) -> str:
-        return f'{self.user.username}'
+        return f'username: {self.username} credit: {self.credit} totalLoan: {self.totalLoan}'
