@@ -20,6 +20,10 @@ class BookUpdateView(generics.UpdateAPIView):
     serializer_class = BookSerializer
     lookup_field = 'title'
 
+    def update(self, request, *args, **kwargs):
+        kwargs['partial'] = True
+        return super().update(request, *args, **kwargs)
+
 
 class BookDeleteView(generics.DestroyAPIView):
     queryset = Book.objects.all()

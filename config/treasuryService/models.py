@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Book(models.Model):
-    title = models.CharField(max_length=128, null=False, unique=True)
+    title = models.CharField(max_length=128, primary_key=True)
     pagesNumber = models.SmallIntegerField(null=True)
     isAvailable = models.BooleanField(default=True)
 
