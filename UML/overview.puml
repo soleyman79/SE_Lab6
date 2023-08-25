@@ -1,0 +1,38 @@
+@startuml overview
+
+actor User as user
+scale 4
+
+cloud "Load Balancer" as lb
+
+node "Server 1" as server1 {
+    rectangle "Nginx" as nginx1
+    rectangle "userService" as ms1
+}
+
+node "Server 2" as server2 {
+    rectangle "Nginx" as nginx2
+    rectangle "treasuryService" as ms2
+}
+
+node "Server 3" as server3 {
+    rectangle "Nginx" as nginx3
+    rectangle "loanService" as ms3
+}
+
+database "Shared Database" as db
+
+user -- lb
+lb -> nginx1
+lb -> nginx2
+lb -> nginx3
+
+nginx1 -- ms1
+nginx2 -- ms2
+nginx3 -- ms3
+
+ms1 -- db
+ms2 -- db
+ms3 -- db
+
+@enduml

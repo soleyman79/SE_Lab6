@@ -1,0 +1,55 @@
+@startuml microservice
+
+scale 4
+
+actor User as user
+
+node "Nginx" as nginx {
+    rectangle "Load Balancer" as lb
+}
+
+node "userService" as userService {
+    rectangle "Microservice" as ms1
+    file "view.py" as userServiceView
+    file "models.py" as userServiceModels
+    file "url.py" as userServiceUrls
+}
+
+node "treasuryService" as treasuryService {
+    rectangle "Microservice" as ms2
+    file "view.py" as treasuryServiceView
+    file "models.py" as treasuryServiceModels
+    file "url.py" as treasuryServiceUrls
+}
+
+node "loanService" as loanService {
+    rectangle "Microservice" as ms3
+    file "view.py" as loanServiceView
+    file "models.py" as loanServiceModels
+    file "url.py" as loanServiceUrls
+}
+
+database "Shared Database" as db
+
+user -- nginx
+nginx -- ms1
+nginx -- ms2
+nginx -- ms3
+
+ms1 -- db
+ms2 -- db
+ms3 -- db
+
+ms1 -- userServiceView
+ms1 -- userServiceModels
+ms1 -- userServiceUrls
+
+ms2 -- treasuryServiceView
+ms2 -- treasuryServiceModels
+ms2 -- treasuryServiceUrls
+
+ms3 -- loanServiceView
+ms3 -- loanServiceModels
+ms3 -- loanServiceUrls
+
+@enduml
